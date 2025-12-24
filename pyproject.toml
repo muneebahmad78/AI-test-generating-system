@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-test-generator"
+version = "1.0.0"
+description = "AI-powered automated test generation for Python"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "AI Test Generator"}
+]
+keywords = ["testing", "pytest", "ai", "llm", "code-coverage", "test-generation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = [
+    "click>=8.1.0",
+    "rich>=13.0.0",
+    "typer>=0.9.0",
+    "astunparse>=1.6.3",
+    "openai>=1.0.0",
+    "anthropic>=0.18.0",
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-timeout>=2.2.0",
+    "coverage>=7.3.0",
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.0.0",
+    "jinja2>=3.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "isort",
+    "mypy",
+    "flake8",
+]
+
+[project.scripts]
+ai-test-gen = "src.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["src"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311', 'py312']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
